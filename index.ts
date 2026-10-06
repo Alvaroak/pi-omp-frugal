@@ -5,11 +5,13 @@
  * trips) into the system prompt every turn, on by default. Toggle with
  * /frugal; state persists across resumes.
  *
- * Publishes state changes over pi.events ("frugal:changed") for
- * my-powerline-footer to render the 🐜 ant flag next to the thinking indicator.
+ * Publishes state changes over pi.events ("frugal:changed") for the
+ * power-footer extensions to render the 🐜 ant flag next to the thinking
+ * indicator.
  */
 
-import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+// Shared by omp and pi. Types come from omp's package (erased at runtime).
+import type { ExtensionAPI } from "@oh-my-pi/pi-coding-agent";
 
 const GUIDANCE = `## Agent efficiency
 
@@ -60,7 +62,12 @@ export default function frugalExtension(pi: ExtensionAPI): void {
 
 	pi.on("before_agent_start", async (event) => {
 		if (!enabled) return;
-		return { systemPrompt: `${event.systemPrompt}\n\n${GUIDANCE}` };
+		// omp's system prompt is string[], pi's is string; omp's ExtensionAPI has a `logger`, pi's does not.
+		const omp = "logger" in pi;
+		const base = Array.isArray(event.systemPrompt) ? event.systemPrompt : [event.systemPrompt];
+		return {
+			systemPrompt: omp ? [...base, GUIDANCE] : `${base.join("\n")}\n\n${GUIDANCE}`,
+		};
 	});
 
 	pi.on("session_start", async (_event, ctx) => {
