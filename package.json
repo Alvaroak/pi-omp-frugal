@@ -1,29 +1,41 @@
 {
-	"name": "@alvaroak/pi-omp-frugal",
-	"version": "0.2.0",
-	"description": "Agent efficiency mode — fewer LLM round trips — for both the omp and pi coding agents",
-	"license": "MIT",
-	"keywords": [
-		"pi-package",
-		"pi-extension",
-		"omp-package",
-		"omp-extension",
-		"system-prompt",
-		"efficiency"
-	],
-	"files": [
-		"index.ts",
-		"README.md",
-		"LICENSE"
-	],
-	"peerDependencies": {
-		"@earendil-works/pi-coding-agent": "*",
-		"@oh-my-pi/pi-coding-agent": "*"
-	},
-	"pi": {
-		"extensions": ["./index.ts"]
-	},
-	"omp": {
-		"extensions": ["./index.ts"]
-	}
+  "name": "@alvaroak/pi-omp-frugal",
+  "version": "0.2.1",
+  "description": "Agent efficiency mode — fewer LLM round trips — for both the omp and pi coding agents",
+  "license": "MIT",
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "omp-package",
+    "omp-extension",
+    "system-prompt",
+    "efficiency"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@oh-my-pi/pi-coding-agent": "*"
+  },
+  "pi": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "omp": {
+    "extensions": [
+      "./index.ts"
+    ]
+  },
+  "peerDependenciesMeta": {
+    "@earendil-works/pi-coding-agent": {
+      "optional": true
+    },
+    "@oh-my-pi/pi-coding-agent": {
+      "optional": true
+    }
+  }
 }
